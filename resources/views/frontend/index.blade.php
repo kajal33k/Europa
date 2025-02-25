@@ -241,7 +241,7 @@
             </div> --}}
         </div>
         <!-- Gradient Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/40 to-black/60 h-[90%] md:h-[97%] mt-2">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/40 to-black/60 h-[92%] md:h-[97%] mt-2">
         </div>
     </div>
     {{-- Acheivements and learning --}}

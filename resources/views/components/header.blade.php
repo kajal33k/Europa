@@ -35,8 +35,8 @@
 
 <nav class="bg-white text-black p-4">
     <div class="container mx-auto flex justify-between md:justify-evenly items-center">
-        <a href="{{ route('index') }}" class="text-2xl font-bold">
-            <img src="{{ asset('asset/img/logo.jpg') }}" alt="" class="h-12 md:w-80 w-44 py-2">
+        <a href="{{ route('index') }}" class="text-2xl font-bold ">
+            <img src="{{ asset('asset/img/logo.jpg') }}" alt="" class="h-12 md:w-90 w-44 py-1">
         </a>
         <button id="menu-btn" class="md:hidden focus:outline-none">
             <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -144,7 +144,7 @@
             <li><a href="{{ route('contact') }}" class="hover:text-gray-300">Contact</a></li>
             {{-- <li><a href="#" class="hover:text-gray-300">Register</a></li> --}}
 
-            <li onclick="togglePopup()" class=" text-black  rounded">Registration</li>
+            <button onclick="togglePopup()" class=" text-black border border-black p-2 hover:bg-gray-300 rounded">Registration</button>
             {{-- 
             <script>
                 function togglePopup() {
@@ -335,7 +335,7 @@
                             class="mt-6 bg-red-600 text-white py-3 px-6 w-full rounded-lg font-bold text-lg hover:bg-red-700 transition duration-300 ease-in-out shadow-lg">
                             Submit Inquiry
                         </button> --}}
-                        <div class="flex flex-col sm:flex-row gap-2 sm:justify-between">
+                        <div class="flex flex-col sm:flex-row gap-2 sm:justify-between mt-1">
                             <button type="submit"
                                 class="w-full sm:w-auto border border-green-500 hover:bg-green-200 text-green-500 px-4 py-2 rounded">Submit</button>
                             <button type="button" onclick="togglePopup()"
@@ -440,7 +440,7 @@
         <li><a href="{{ route('about') }}" class="block py-2 hover:text-gray-300">About us</a></li>
         <li><a href="{{ route('contact') }}" class="block py-2 hover:text-gray-300">Contact</a></li>
         <!-- Register Button -->
-        <li onclick="toggleMobilePopup()" class="block py-2 hover:text-gray-300 cursor-pointer">Register</li>
+        <button onclick="toggleMobilePopup()" class="block p-2 border border-black hover:text-gray-600 cursor-pointer">Registration</button>
 
         <!-- Mobile-Only Popup Modal -->
         <div id="mobilePopup"
@@ -525,7 +525,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col gap-2">
+                    <div class="flex flex-col gap-2 mt-1">
                         <button type="submit"
                             class="w-full border border-green-500 hover:bg-green-200 text-green-500 px-4 py-2 rounded mobile-btn">Submit</button>
                         <button type="button" onclick="toggleMobilePopup()"

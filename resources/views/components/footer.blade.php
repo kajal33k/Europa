@@ -3,7 +3,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
         <!-- Company Info -->
         <div>
-            <img src="{{asset('asset/img/logo-short.jpg')}}" alt="" class="w-24 h-24 p-1">
+            <img src="{{asset('asset/img/logo-short.png')}}" alt="" class="w-24 h-24 p-1">
           <h2 class="text-xl font-semibold text-white mb-4">Europa olympiad</h2>
           <p class="text-sm">Providing high-quality solutions for modern businesses. Your success is our priority.</p>
         </div>
