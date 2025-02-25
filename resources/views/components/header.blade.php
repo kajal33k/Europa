@@ -1,13 +1,13 @@
 <!-- Top Bar -->
 <div
-    class="bg-gray-700 text-white py-2 px-6 md:px-12 lg:px-24 flex flex-col md:flex-row items-center justify-between text-center md:text-left">
+    class="bg-gray-700 text-white py-2 px-2 md:px-12 lg:px-24 flex flex-col md:flex-row items-center justify-between text-center md:text-left">
     <!-- Email -->
-    <div class="text-sm mb-2 md:mb-0">
+    <div class="text-sm mb-1 md:mb-0">
         <a href="mailto:info@europaolympiad.org" class="hover:text-gray-400">info@europaolympiad.org</a>
     </div>
 
     <!-- Phone Number -->
-    <div class="text-sm mb-2 md:mb-0">
+    <div class="text-sm mb-1 md:mb-0">
         <a href="tel:+919170032441" class="hover:text-gray-400">+91 9170032441 /</a>
         <a href="tel:+918787286010" class="hover:text-gray-400">8787286010</a>
 
@@ -349,7 +349,7 @@
         </ul>
     </div>
     {{-- mobile menu --}}
-    <ul class="hidden md:hidden mt-4 space-y-2" id="mobile-menu">
+    <ul class="hidden md:hidden mt-40 px-8 space-y-2 fixed top-0 left-0 w-full bg-white shadow-md z-50" id="mobile-menu">
         <li><a href="{{ route('index') }}" class="block py-2 hover:text-gray-300">Home</a></li>
         <li class="relative">
             <button id="mobile-dropdown-btn" class="flex items-center gap-2 hover:text-gray-300"><a
@@ -548,7 +548,7 @@
     </ul>
 </nav>
 
-<script>
+{{-- <script>
     document.getElementById("menu-btn").addEventListener("click", function() {
         document.getElementById("mobile-menu").classList.toggle("hidden");
     });
@@ -642,7 +642,78 @@
             });
         });
     });
+</script> --}}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuBtn = document.getElementById("menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const dropdownButtons = document.querySelectorAll("[id='dropdown-btn']");
+        const mobileDropdownButtons = document.querySelectorAll("[id='mobile-dropdown-btn']");
+        
+        // Toggle Mobile Menu
+        menuBtn.addEventListener("click", function (event) {
+            event.stopPropagation();
+            mobileMenu.classList.toggle("hidden");
+            mobileMenu.style.zIndex = "50"; // Ensure it appears on top
+        });
+
+        // Toggle Dropdowns
+        function toggleDropdown(button) {
+            const dropdown = button.nextElementSibling;
+
+            // Close all other dropdowns
+            document.querySelectorAll("ul[id='dropdown'], ul[id='mobile-dropdown']").forEach(menu => {
+                if (menu !== dropdown) {
+                    menu.classList.add("hidden");
+                }
+            });
+
+            // Open the selected dropdown
+            dropdown.classList.toggle("hidden");
+            dropdown.style.zIndex = "50"; // Ensure it appears on top
+        }
+
+        // Handle Desktop Dropdowns
+        dropdownButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.stopPropagation();
+                toggleDropdown(this);
+            });
+        });
+
+        // Handle Mobile Dropdowns
+        mobileDropdownButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.stopPropagation();
+                toggleDropdown(this);
+            });
+        });
+
+        // Close menus when clicking outside
+        document.addEventListener("click", function () {
+            document.querySelectorAll("ul[id='dropdown'], ul[id='mobile-dropdown']").forEach(menu => {
+                menu.classList.add("hidden");
+            });
+            mobileMenu.classList.add("hidden");
+        });
+
+        // Prevent closing when clicking inside a dropdown
+        document.querySelectorAll("ul[id='dropdown'], ul[id='mobile-dropdown']").forEach(dropdown => {
+            dropdown.addEventListener("click", function (event) {
+                event.stopPropagation();
+            });
+        });
+
+        // Close dropdowns on mobile touch outside
+        document.addEventListener("touchstart", function () {
+            document.querySelectorAll("ul[id='dropdown'], ul[id='mobile-dropdown']").forEach(menu => {
+                menu.classList.add("hidden");
+            });
+            mobileMenu.classList.add("hidden");
+        });
+    });
 </script>
+
 
 <script>
     function togglePopup() {

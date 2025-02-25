@@ -1,7 +1,7 @@
 @extends('components.main')
 @section('content')
     {{-- BANNER --}}
-    <div class="max-w-full mx-auto">
+    <div class="max-w-full mx-auto flex flex-col">
         <section id="carousel" class="relative overflow-hidden">
             <!-- Carousel Wrapper -->
             <div class="relative h-56 sm:h-72 md:h-[80vh]">
