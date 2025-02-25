@@ -171,13 +171,46 @@
     </div>
 
     {{-- slider --}}
-    <div class="flex justify-center p-6 bg-gray-100 ">
+    {{-- <div class="flex justify-center p-6 bg-gray-100 ">
         <h1 class="text-center text-2xl sm:text-3xl md:text-4xl font-bold w-full">
             Our Group Institutions
         </h1>
+    </div> --}}
+ <!-- Title -->
+ <div class="flex justify-center p-6">
+    <h1 class="text-center text-2xl sm:text-3xl md:text-4xl font-bold w-full">
+        Our Group Institutions
+    </h1>
+</div>
+
+    <div class="w-full relative overflow-hidden flex justify-center px-44 py-4">
+       
+        <!-- Slider Wrapper -->
+        <div class="slider-container  overflow-hidden relative">
+            <div id="sliderTrack" class="flex transition-transform duration-500 ease-in-out">
+                <div class="slider-item w-full md:w-1/2 flex-shrink-0 p-3">
+                    <img src="{{asset('asset/img/banner1.jpg')}}" class="rounded-lg w-full shadow-md" alt="Slide 1">
+                </div>
+                <div class="slider-item w-full md:w-1/2 flex-shrink-0 p-3">
+                    <img src="{{asset('asset/img/banner2.jpg')}}" class="rounded-lg w-full shadow-md" alt="Slide 2">
+                </div>
+                <div class="slider-item w-full md:w-1/2 flex-shrink-0 p-3">
+                    <img src="{{asset('asset/img/banner3.jpg')}}" class="rounded-lg w-full shadow-md" alt="Slide 3">
+                </div>
+                <div class="slider-item w-full md:w-1/2 flex-shrink-0 p-3">
+                    <img src="{{asset('asset/img/logo.jpg')}}" class="rounded-lg w-full shadow-md" alt="Slide 4">
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        {{-- <button id="prevBtn" class="absolute left-3 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-white shadow-md hover:bg-gray-300">❮</button>
+        <button id="nextBtn" class="absolute right-3 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-white shadow-md hover:bg-gray-300">❯</button> --}}
+    
     </div>
 
-    <div class="bg-gray-100 flex items-center justify-center min-h-auto p-4">
+
+    {{-- <div class="bg-gray-100 flex items-center justify-center min-h-auto p-4">
         <div class="relative w-full max-w-5xl overflow-hidden">
             <!-- Slider Container -->
             <div class="slider-container rounded-lg shadow-lg  overflow-hidden">
@@ -199,7 +232,7 @@
             <button id="next"
                 class="nav-btn absolute right-3 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-white shadow-md hover:bg-gray-300">❯</button>
         </div>
-    </div>
+    </div> --}}
 
 
     {{-- simple slider --}}
@@ -250,6 +283,7 @@
 
 
 {{-- Acheivements and learning --}}
+
 <div class="bg-gray-100 flex items-center justify-center min-h-auto p-4">
     <div class="relative w-full max-w-5xl overflow-hidden">
         <!-- Responsive Titles -->
@@ -257,9 +291,9 @@
             <h1 class="text-xl md:text-2xl font-semibold p-2">Achievements</h1>
             <h1 class="text-xl md:text-2xl font-semibold p-2">Experiential Learning Corner</h1>
         </div>
-        
+
         <!-- Slider Wrapper -->
-        <div class="slider-wrapper rounded-lg shadow-lg overflow-hidden mt-4">
+        <div class="slider-wrapper rounded-lg shadow-lg overflow-hidden mt-4 relative">
             <div id="imageSlider" class="flex transition-transform duration-500 ease-in-out">
                 <div class="slide w-full md:w-1/2 flex-shrink-0 p-3">
                     <img src="{{ asset('asset/img/banner1.jpg') }}" class="rounded-lg w-full shadow-md" alt="Slide 1">
@@ -325,28 +359,87 @@
 
 
 {{-- Acheivements and learnig --}}
+
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const slider = document.getElementById("imageSlider");
-        const slides = document.querySelectorAll(".slide");
-        const prevBtn = document.getElementById("prevSlide");
-        const nextBtn = document.getElementById("nextSlide");
-        let index = 0;
+   document.addEventListener("DOMContentLoaded", function () {
+    const slider = document.getElementById("imageSlider");
+    let slides = document.querySelectorAll(".slide");
+    const prevBtn = document.getElementById("prevSlide");
+    const nextBtn = document.getElementById("nextSlide");
 
-        function updateSlider() {
-            slider.style.transform = `translateX(-${index * 100}%)`;
+    let index = 1; // Start at 1 because of cloned elements
+    const slideWidth = slides[0].offsetWidth;
+    let autoSlideInterval;
+
+    // Clone first and last slides
+    const firstClone = slides[0].cloneNode(true);
+    const lastClone = slides[slides.length - 1].cloneNode(true);
+
+    // Add clones to the slider
+    slider.appendChild(firstClone);
+    slider.insertBefore(lastClone, slides[0]);
+
+    // Re-fetch slides after cloning
+    slides = document.querySelectorAll(".slide");
+
+    // Set initial position
+    slider.style.transform = `translateX(-${index * slideWidth}px)`;
+
+    // Function to move the slider smoothly
+    function updateSlider() {
+        slider.style.transition = "transform 0.5s ease-in-out";
+        slider.style.transform = `translateX(-${index * slideWidth}px)`;
+    }
+
+    // Move to the next slide
+    function nextSlide() {
+        if (index >= slides.length - 1) return;
+        index++;
+        updateSlider();
+    }
+
+    // Move to the previous slide
+    function prevSlide() {
+        if (index <= 0) return;
+        index--;
+        updateSlider();
+    }
+
+    // Reset transition for seamless loop
+    slider.addEventListener("transitionend", () => {
+        if (index === slides.length - 1) {
+            slider.style.transition = "none";
+            index = 1;
+            slider.style.transform = `translateX(-${index * slideWidth}px)`;
         }
-
-        nextBtn.addEventListener("click", function () {
-            index = (index + 1) % slides.length;
-            updateSlider();
-        });
-
-        prevBtn.addEventListener("click", function () {
-            index = (index - 1 + slides.length) % slides.length;
-            updateSlider();
-        });
+        if (index === 0) {
+            slider.style.transition = "none";
+            index = slides.length - 2;
+            slider.style.transform = `translateX(-${index * slideWidth}px)`;
+        }
     });
+
+    // Auto slide function
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(nextSlide, 4000);
+    }
+
+    function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+    }
+
+    // Event Listeners
+    nextBtn.addEventListener("click", nextSlide);
+    prevBtn.addEventListener("click", prevSlide);
+
+    // Pause autoplay on hover
+    slider.addEventListener("mouseenter", stopAutoSlide);
+    slider.addEventListener("mouseleave", startAutoSlide);
+
+    // Start autoplay on page load
+    startAutoSlide();
+});
+ 
 </script>
 
 {{-- sliedr image --}}
@@ -396,7 +489,7 @@
             });
         </script>
         {{-- Our Group Institutions script --}}
-        <script>
+        {{-- <script>
             document.addEventListener("DOMContentLoaded", function() {
                 const slider = document.getElementById("slider");
                 const prev = document.getElementById("prev");
@@ -448,8 +541,94 @@
 
                 updateSlider(); // Initial call
             });
+        </script> --}}
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const slider = document.getElementById("sliderTrack");
+                let slides = document.querySelectorAll(".slider-item");
+                const prevBtn = document.getElementById("prevBtn");
+                const nextBtn = document.getElementById("nextBtn");
+    
+                let index = 1; // Start at 1 due to cloned elements
+                let slideWidth = slides[0].offsetWidth;
+                let autoSlideInterval;
+    
+                // Clone first and last slides
+                const firstClone = slides[0].cloneNode(true);
+                const lastClone = slides[slides.length - 1].cloneNode(true);
+    
+                // Append clones
+                slider.appendChild(firstClone);
+                slider.insertBefore(lastClone, slides[0]);
+    
+                // Re-fetch slides after adding clones
+                slides = document.querySelectorAll(".slider-item");
+    
+                // Set initial position
+                slider.style.transform = `translateX(-${index * slideWidth}px)`;
+    
+                // Function to move the slider
+                function updateSlider() {
+                    slider.style.transition = "transform 0.5s ease-in-out";
+                    slider.style.transform = `translateX(-${index * slideWidth}px)`;
+                }
+    
+                // Move to the next slide
+                function nextSlide() {
+                    if (index >= slides.length - 1) return;
+                    index++;
+                    updateSlider();
+                }
+    
+                // Move to the previous slide
+                function prevSlide() {
+                    if (index <= 0) return;
+                    index--;
+                    updateSlider();
+                }
+    
+                // Looping Fix: Instantly Reset Without Transition Delay
+                slider.addEventListener("transitionend", () => {
+                    if (index === slides.length - 1) {
+                        slider.style.transition = "none";
+                        index = 1;
+                        slider.style.transform = `translateX(-${index * slideWidth}px)`;
+                    }
+                    if (index === 0) {
+                        slider.style.transition = "none";
+                        index = slides.length - 2;
+                        slider.style.transform = `translateX(-${index * slideWidth}px)`;
+                    }
+                });
+    
+                // Auto slide function
+                function startAutoSlide() {
+                    autoSlideInterval = setInterval(nextSlide, 4000);
+                }
+    
+                function stopAutoSlide() {
+                    clearInterval(autoSlideInterval);
+                }
+    
+                // Event Listeners
+                nextBtn.addEventListener("click", nextSlide);
+                prevBtn.addEventListener("click", prevSlide);
+    
+                // Pause autoplay on hover
+                slider.addEventListener("mouseenter", stopAutoSlide);
+                slider.addEventListener("mouseleave", startAutoSlide);
+    
+                // Start autoplay on page load
+                startAutoSlide();
+    
+                // Adjust slide width on window resize
+                window.addEventListener("resize", () => {
+                    slideWidth = slides[0].offsetWidth;
+                    slider.style.transform = `translateX(-${index * slideWidth}px)`;
+                });
+            });
         </script>
-
+       
         {{-- news and letters script --}}
         <script>
             let currentIndex = 0;
