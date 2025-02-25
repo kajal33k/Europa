@@ -33,7 +33,7 @@
 
 {{-- NAVBAR --}}
 
-<nav class="bg-gray-50 text-black p-4">
+<nav class="bg-white text-black p-4">
     <div class="container mx-auto flex justify-between md:justify-evenly items-center">
         <a href="{{ route('index') }}" class="text-2xl font-bold">
             <img src="{{ asset('asset/img/logo.jpg') }}" alt="" class="h-12 md:w-80 w-44 py-2">
@@ -349,7 +349,7 @@
         </ul>
     </div>
     {{-- mobile menu --}}
-    <ul class="hidden md:hidden mt-40 px-8 space-y-2 fixed top-0 left-0 w-full bg-white shadow-md z-50" id="mobile-menu">
+    <ul class="hidden md:hidden space-y-2 top-0 left-0 w-full bg-white  z-50" id="mobile-menu">
         <li><a href="{{ route('index') }}" class="block py-2 hover:text-gray-300">Home</a></li>
         <li class="relative">
             <button id="mobile-dropdown-btn" class="flex items-center gap-2 hover:text-gray-300"><a
@@ -548,7 +548,7 @@
     </ul>
 </nav>
 
-{{-- <script>
+<script>
     document.getElementById("menu-btn").addEventListener("click", function() {
         document.getElementById("mobile-menu").classList.toggle("hidden");
     });
@@ -642,79 +642,10 @@
             });
         });
     });
-</script> --}}
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const menuBtn = document.getElementById("menu-btn");
-        const mobileMenu = document.getElementById("mobile-menu");
-        const dropdownButtons = document.querySelectorAll("[id='dropdown-btn']");
-        const mobileDropdownButtons = document.querySelectorAll("[id='mobile-dropdown-btn']");
-        
-        // Toggle Mobile Menu
-        menuBtn.addEventListener("click", function (event) {
-            event.stopPropagation();
-            mobileMenu.classList.toggle("hidden");
-            mobileMenu.style.zIndex = "50"; // Ensure it appears on top
-        });
-
-        // Toggle Dropdowns
-        function toggleDropdown(button) {
-            const dropdown = button.nextElementSibling;
-
-            // Close all other dropdowns
-            document.querySelectorAll("ul[id='dropdown'], ul[id='mobile-dropdown']").forEach(menu => {
-                if (menu !== dropdown) {
-                    menu.classList.add("hidden");
-                }
-            });
-
-            // Open the selected dropdown
-            dropdown.classList.toggle("hidden");
-            dropdown.style.zIndex = "50"; // Ensure it appears on top
-        }
-
-        // Handle Desktop Dropdowns
-        dropdownButtons.forEach(button => {
-            button.addEventListener("click", function (event) {
-                event.stopPropagation();
-                toggleDropdown(this);
-            });
-        });
-
-        // Handle Mobile Dropdowns
-        mobileDropdownButtons.forEach(button => {
-            button.addEventListener("click", function (event) {
-                event.stopPropagation();
-                toggleDropdown(this);
-            });
-        });
-
-        // Close menus when clicking outside
-        document.addEventListener("click", function () {
-            document.querySelectorAll("ul[id='dropdown'], ul[id='mobile-dropdown']").forEach(menu => {
-                menu.classList.add("hidden");
-            });
-            mobileMenu.classList.add("hidden");
-        });
-
-        // Prevent closing when clicking inside a dropdown
-        document.querySelectorAll("ul[id='dropdown'], ul[id='mobile-dropdown']").forEach(dropdown => {
-            dropdown.addEventListener("click", function (event) {
-                event.stopPropagation();
-            });
-        });
-
-        // Close dropdowns on mobile touch outside
-        document.addEventListener("touchstart", function () {
-            document.querySelectorAll("ul[id='dropdown'], ul[id='mobile-dropdown']").forEach(menu => {
-                menu.classList.add("hidden");
-            });
-            mobileMenu.classList.add("hidden");
-        });
-    });
 </script>
 
 
+{{-- pop up registration --}}
 <script>
     function togglePopup() {
         document.getElementById("popup").classList.toggle("hidden");
