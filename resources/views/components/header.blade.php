@@ -8,7 +8,9 @@
 
     <!-- Phone Number -->
     <div class="text-sm mb-2 md:mb-0">
-        <a href="tel:+919170032441" class="hover:text-gray-400">+91 9170032441 / 8787286010</a>
+        <a href="tel:+919170032441" class="hover:text-gray-400">+91 9170032441 /</a>
+        <a href="tel:+918787286010" class="hover:text-gray-400">8787286010</a>
+
     </div>
 
     <!-- Social Media Icons -->
@@ -33,8 +35,8 @@
 
 <nav class="bg-gray-50 text-black p-4">
     <div class="container mx-auto flex justify-evenly items-center">
-        <a href="#" class="text-2xl font-bold">
-            <img src="{{ asset('asset/img/logo.jpg') }}" alt="" class="h-12 w-90">
+        <a href="{{route('index')}}" class="text-2xl font-bold">
+            <img src="{{ asset('asset/img/logo.jpg') }}" alt="" class="h-12 md:w-90 w-60">
         </a>
         <button id="menu-btn" class="md:hidden focus:outline-none">
             <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -138,9 +140,162 @@
 
                 </ul>
             </li>
-            <li><a href="#" class="hover:text-gray-300">About us</a></li>
-            <li><a href="#" class="hover:text-gray-300">Contact</a></li>
-            <li><a href="#" class="hover:text-gray-300">Register</a></li>
+            <li><a href="{{ route('about') }}" class="hover:text-gray-300">About us</a></li>
+            <li><a href="{{ route('contact') }}" class="hover:text-gray-300">Contact</a></li>
+            {{-- <li><a href="#" class="hover:text-gray-300">Register</a></li> --}}
+
+            <li onclick="togglePopup()" class=" text-black  rounded">Registration</li>
+{{-- 
+            <script>
+                function togglePopup() {
+                    document.getElementById("popup").classList.toggle("hidden");
+                }
+
+                function validateForm(event) {
+                    event.preventDefault();
+                    let name = document.getElementById("name").value;
+                    let email = document.getElementById("email").value;
+                    let country = document.getElementById("country").value;
+                    let sport = document.getElementById("sport").value;
+                    let age = document.getElementById("age").value;
+                    let gender = document.getElementById("gender").value;
+                    let phone = document.getElementById("phone").value;
+                    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                    if (!name) {
+                        alert("Name is required");
+                        return;
+                    }
+                    if (!email || !emailRegex.test(email)) {
+                        alert("Valid email is required");
+                        return;
+                    }
+                    if (!country) {
+                        alert("Country is required");
+                        return;
+                    }
+                    if (!sport) {
+                        alert("Sport is required");
+                        return;
+                    }
+                    if (!age || isNaN(age) || age <= 0) {
+                        alert("Valid age is required");
+                        return;
+                    }
+                    if (!gender) {
+                        alert("Gender selection is required");
+                        return;
+                    }
+                    if (!phone || phone.length < 10) {
+                        alert("Valid phone number is required");
+                        return;
+                    }
+
+                    alert("Registration Successful");
+                    togglePopup();
+                }
+            </script> --}}
+            <script>
+                function togglePopup() {
+                    const popup = document.getElementById("popup");
+                    popup.classList.toggle("hidden");
+                    document.body.classList.toggle("overflow-hidden"); // Prevent background scrolling
+                }
+            
+                function validateForm(event) {
+                    event.preventDefault();
+                    
+                    let name = document.getElementById("name").value.trim();
+                    let email = document.getElementById("email").value.trim();
+                    let country = document.getElementById("country").value.trim();
+                    let sport = document.getElementById("sport").value.trim();
+                    let age = document.getElementById("age").value.trim();
+                    let gender = document.getElementById("gender").value;
+                    let phone = document.getElementById("phone").value.trim();
+                    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+                    if (!name) {
+                        alert("Name is required");
+                        return;
+                    }
+                    if (!email || !emailRegex.test(email)) {
+                        alert("Valid email is required");
+                        return;
+                    }
+                    if (!country) {
+                        alert("Country is required");
+                        return;
+                    }
+                    if (!sport) {
+                        alert("Sport is required");
+                        return;
+                    }
+                    if (!age || isNaN(age) || age <= 0) {
+                        alert("Valid age is required");
+                        return;
+                    }
+                    if (!gender) {
+                        alert("Gender selection is required");
+                        return;
+                    }
+                    if (!phone || phone.length < 10) {
+                        alert("Valid phone number is required");
+                        return;
+                    }
+            
+                    alert("Registration Successful");
+                    togglePopup(); // Close popup after successful validation
+                }
+            </script>
+            
+
+            <div id="popup"
+                class="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center hidden z-50 px-4">
+                <div class="bg-white p-4 sm:p-6 rounded-lg max-w-sm w-full shadow-lg">
+                    <h2 class="text-xl font-bold mb-4 text-center">Registration</h2>
+                    <form onsubmit="validateForm(event)" class="space-y-4">
+                        <div>
+                            <input type="text" id="name" placeholder="Full Name"
+                                class="w-full p-2 border rounded" />
+                        </div>
+                        <div>
+                            <input type="email" id="email" placeholder="Email"
+                                class="w-full p-2 border rounded" />
+                        </div>
+                        <div>
+                            <input type="text" id="country" placeholder="Country"
+                                class="w-full p-2 border rounded" />
+                        </div>
+                        <div>
+                            <input type="text" id="sport" placeholder="Sport"
+                                class="w-full p-2 border rounded" />
+                        </div>
+                        <div>
+                            <input type="number" id="age" placeholder="Age"
+                                class="w-full p-2 border rounded" />
+                        </div>
+                        <div>
+                            <select id="gender" class="w-full p-2 border rounded">
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <input type="tel" id="phone" placeholder="Phone Number"
+                                class="w-full p-2 border rounded" />
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-2 sm:justify-between">
+                            <button type="submit"
+                                class="w-full sm:w-auto border border-green-500 hover:bg-green-200 text-green-500 px-4 py-2 rounded">Submit</button>
+                            <button type="button" onclick="togglePopup()"
+                                class="w-full sm:w-auto border border-red-500 text-red-500 hover:bg-red-200 px-4 py-2 rounded">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
 
         </ul>
     </div>
@@ -149,15 +304,15 @@
         <li><a href="{{ route('index') }}" class="block py-2 hover:text-gray-300">Home</a></li>
         <li class="relative">
             <button id="mobile-dropdown-btn" class="flex items-center gap-2 hover:text-gray-300"><a
-                    href="{{ route('euroigko') }}">Europa IGKO</a>
+                    href="#">Europa IGKO</a>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
             </button>
             <ul class="hidden mt-2 space-y-2 pl-4" id="mobile-dropdown">
-                <li><a href="{{ route('class_1') }}" class="block py-2 hover:text-gray-300">IGKO Exam</a></li>
-                <li><a href="#" class="block py-2 hover:text-gray-300">Class 1</a></li>
+                <li><a href="{{ route('euroigko') }}" class="block py-2 hover:text-gray-300">IGKO Exam</a></li>
+                <li><a href="{{ route('class_1') }}" class="block py-2 hover:text-gray-300">Class 1</a></li>
                 <li><a href="#" class="block py-2 hover:text-gray-300">class 2</a></li>
                 <li><a href="#" class="block py-2 hover:text-gray-300">Class 3</a></li>
                 <li><a href="#" class="block py-2 hover:text-gray-300">class 4</a></li>
@@ -233,9 +388,68 @@
 
             </ul>
         </li>
-        <li><a href="#" class="block py-2 hover:text-gray-300">About us</a></li>
-        <li><a href="#" class="block py-2 hover:text-gray-300">Contact</a></li>
-        <li><a href="#" class="block py-2 hover:text-gray-300">Register</a></li>
+        <li><a href="{{ route('about') }}" class="block py-2 hover:text-gray-300">About us</a></li>
+        <li><a href="{{ route('contact') }}" class="block py-2 hover:text-gray-300">Contact</a></li>
+        <!-- Register Button -->
+        <li onclick="toggleMobilePopup()" class="block py-2 hover:text-gray-300 cursor-pointer">Register</li>
+
+        <!-- Mobile-Only Popup Modal -->
+        <div id="mobilePopup"
+            class="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center hidden z-50 px-4 sm:hidden mobile-modal">
+            <div class="bg-white p-4 rounded-lg max-w-sm w-full shadow-lg">
+                <h2 class="text-xl font-bold mb-4 text-center">Registration</h2>
+                <form onsubmit="validateMobileForm(event)" class="space-y-4">
+                    <div>
+                        <input type="text" id="mobileName" placeholder="Full Name"
+                            class="w-full p-2 border rounded mobile-input" />
+                    </div>
+                    <div>
+                        <input type="email" id="mobileEmail" placeholder="Email"
+                            class="w-full p-2 border rounded mobile-input" />
+                    </div>
+                    <div>
+                        <input type="text" id="mobileCountry" placeholder="Country"
+                            class="w-full p-2 border rounded mobile-input" />
+                    </div>
+                    <div>
+                        <input type="text" id="mobileSport" placeholder="Sport"
+                            class="w-full p-2 border rounded mobile-input" />
+                    </div>
+                    <div>
+                        <input type="number" id="mobileAge" placeholder="Age"
+                            class="w-full p-2 border rounded mobile-input" />
+                    </div>
+                    <div>
+                        <select id="mobileGender" class="w-full p-2 border rounded mobile-input">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="tel" id="mobilePhone" placeholder="Phone Number"
+                            class="w-full p-2 border rounded mobile-input" />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <button type="submit"
+                            class="w-full border border-green-500 hover:bg-green-200 text-green-500 px-4 py-2 rounded mobile-btn">Submit</button>
+                        <button type="button" onclick="toggleMobilePopup()"
+                            class="w-full border border-red-500 text-red-500 hover:bg-red-200 px-4 py-2 rounded mobile-btn">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- JavaScript for Toggling the Mobile Popup -->
+        <script>
+            function toggleMobilePopup() {
+                const mobilePopup = document.getElementById('mobilePopup');
+                mobilePopup.classList.toggle('hidden');
+                document.body.classList.toggle('overflow-hidden'); // Prevent scrolling when modal is open
+            }
+        </script>
+
 
     </ul>
 </nav>
@@ -334,4 +548,39 @@
             });
         });
     });
+</script>
+
+<script>
+    function togglePopup() {
+        document.getElementById("popup").classList.toggle("hidden");
+    }
+
+    function validateForm(event) {
+        event.preventDefault();
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let country = document.getElementById("country").value;
+        let sport = document.getElementById("sport").value;
+        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!name) {
+            alert("Name is required");
+            return;
+        }
+        if (!email || !emailRegex.test(email)) {
+            alert("Valid email is required");
+            return;
+        }
+        if (!country) {
+            alert("Country is required");
+            return;
+        }
+        if (!sport) {
+            alert("Sport is required");
+            return;
+        }
+
+        alert("Registration Successful");
+        togglePopup();
+    }
 </script>

@@ -6,7 +6,7 @@
         <h1 class="text-3xl md:text-6xl font-extrabold text-center md:text-left tracking-wide">
             About Us
         </h1>
-        <img src="{{ asset('asset/img/globe.png') }}" alt="Globe" class="h-32 w-32 md:h-40 md:w-40 animate-pulse">
+        <img src="{{ asset('asset/img/globe.png') }}" alt="Globe" class="h-32 w-32 md:h-40 md:w-40 ">
     </div>
 </header>
 
