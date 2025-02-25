@@ -1,7 +1,7 @@
 @extends('components.main')
 @section('content')
     {{-- BANNER --}}
-    <div class="max-w-full mx-auto flex flex-col">
+    <div class="max-w-full mx-auto">
         <section id="carousel" class="relative overflow-hidden">
             <!-- Carousel Wrapper -->
             <div class="relative h-56 sm:h-72 md:h-[80vh]">
@@ -167,54 +167,37 @@
     </div>
 
     {{-- slider groups --}}
-    <div class="flex justify-center p-6 bg-gray-100">
+    <div class="flex justify-center p-6 bg-gray-100 ">
         <h1 class="text-center text-2xl sm:text-3xl md:text-4xl font-bold w-full">
             Our Group Institutions
         </h1>
     </div>
-    
     <div class="bg-gray-100 flex items-center justify-center min-h-auto p-4">
         <div class="relative w-full max-w-5xl overflow-hidden">
             <!-- Slider Container -->
-            <div class="slider-container rounded-lg shadow-lg overflow-hidden relative">
+            <div class="slider-container rounded-lg shadow-lg overflow-hidden">
                 <div id="slider" class="flex transition-transform duration-500 ease-in-out">
-                    <!-- Cloned Last Slide (for smooth transition) -->
-                    <div class="slide w-full md:w-1/2 flex-shrink-0 p-3">
-                        <img src="{{ asset('asset/img/banner3.jpg') }}" class="rounded-lg w-full shadow-md" alt="Image 3">
+                    <div class="w-full md:w-1/2 flex-shrink-0 p-3">
+                        <img src="{{ asset('asset/img/banner1.jpg') }}" class="rounded-lg w-full h-auto shadow-md object-cover" alt="Image 1">
                     </div>
-                    <!-- Original Slides -->
-                    <div class="slide w-full md:w-1/2 flex-shrink-0 p-3">
-                        <img src="{{ asset('asset/img/banner1.jpg') }}" class="rounded-lg w-full shadow-md" alt="Image 1">
+                    <div class="w-full md:w-1/2 flex-shrink-0 p-3">
+                        <img src="{{ asset('asset/img/banner2.jpg') }}" class="rounded-lg w-full h-auto shadow-md object-cover" alt="Image 2">
                     </div>
-                    <div class="slide w-full md:w-1/2 flex-shrink-0 p-3">
-                        <img src="{{ asset('asset/img/banner2.jpg') }}" class="rounded-lg w-full shadow-md" alt="Image 2">
+                    <div class="w-full md:w-1/2 flex-shrink-0 p-3">
+                        <img src="{{ asset('asset/img/banner3.jpg') }}" class="rounded-lg w-full h-auto shadow-md object-cover" alt="Image 3">
                     </div>
-                    <div class="slide w-full md:w-1/2 flex-shrink-0 p-3">
-                        <img src="{{ asset('asset/img/banner3.jpg') }}" class="rounded-lg w-full shadow-md" alt="Image 3">
-                    </div>
-                    <div class="slide w-full md:w-1/2 flex-shrink-0 p-3">
-                        <img src="{{ asset('asset/img/banner1.jpg') }}" class="rounded-lg w-full shadow-md" alt="Image 4">
-                    </div>
-                    <!-- Cloned First Slide (for smooth transition) -->
-                    <div class="slide w-full md:w-1/2 flex-shrink-0 p-3">
-                        <img src="{{ asset('asset/img/banner1.jpg') }}" class="rounded-lg w-full shadow-md" alt="Image 1">
+                    <div class="w-full md:w-1/2 flex-shrink-0 p-3">
+                        <img src="{{ asset('asset/img/banner1.jpg') }}" class="rounded-lg w-full h-auto shadow-md object-cover" alt="Image 4">
                     </div>
                 </div>
             </div>
     
             <!-- Navigation Buttons -->
-            <button id="prev"
-                class="absolute left-3 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-white shadow-md hover:bg-gray-300">
-                ❮
-            </button>
-            <button id="next"
-                class="absolute right-3 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-white shadow-md hover:bg-gray-300">
-                ❯
-            </button>
+            <button id="prev" class="nav-btn absolute left-2 md:left-3 top-1/2 transform -translate-y-1/2 p-2 md:p-3 rounded-full bg-white shadow-md hover:bg-gray-300">❮</button>
+            <button id="next" class="nav-btn absolute right-2 md:right-3 top-1/2 transform -translate-y-1/2 p-2 md:p-3 rounded-full bg-white shadow-md hover:bg-gray-300">❯</button>
         </div>
     </div>
     
-  
 
 
     {{-- simple slider --}}
@@ -541,85 +524,100 @@
         });
     </script> --}}
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const slider = document.getElementById("slider");
-            const slides = Array.from(document.querySelectorAll("#slider > div"));
-            const prevBtn = document.getElementById("prev");
-            const nextBtn = document.getElementById("next");
-    
-            let index = 1; // Start at first actual slide
-            const slideWidth = slides[0].offsetWidth;
-    
-            // Clone first and last slides
-            const firstClone = slides[0].cloneNode(true);
-            const lastClone = slides[slides.length - 1].cloneNode(true);
-    
-            slider.appendChild(firstClone);
-            slider.insertBefore(lastClone, slides[0]);
-    
-            const allSlides = Array.from(document.querySelectorAll("#slider > div")); // Update slides list
-            slider.style.transform = `translateX(-${index * slideWidth}px)`;
-    
-            function updateSlider() {
-                slider.style.transition = "transform 0.5s ease-in-out";
-                slider.style.transform = `translateX(-${index * slideWidth}px)`;
-            }
-    
-            function nextSlide() {
-                if (index >= allSlides.length - 1) return;
-                index++;
-                updateSlider();
-    
-                // If reaching the cloned first slide, reset to first real slide
-                if (index === allSlides.length - 1) {
-                    setTimeout(() => {
-                        slider.style.transition = "none";
-                        index = 1;
-                        slider.style.transform = `translateX(-${index * slideWidth}px)`;
-                    }, 500);
-                }
-            }
-    
-            function prevSlide() {
-                if (index <= 0) return;
-                index--;
-                updateSlider();
-    
-                // If reaching the cloned last slide, reset to last real slide
-                if (index === 0) {
-                    setTimeout(() => {
-                        slider.style.transition = "none";
-                        index = allSlides.length - 2;
-                        slider.style.transform = `translateX(-${index * slideWidth}px)`;
-                    }, 500);
-                }
-            }
-    
-            // Auto-slide every 3 seconds
-            let autoSlide = setInterval(nextSlide, 3000);
-    
-            function stopAutoSlide() {
-                clearInterval(autoSlide);
-            }
-    
-            function startAutoSlide() {
-                autoSlide = setInterval(nextSlide, 3000);
-            }
-    
-            // Event Listeners
-            nextBtn.addEventListener("click", nextSlide);
-            prevBtn.addEventListener("click", prevSlide);
-            slider.addEventListener("mouseenter", stopAutoSlide);
-            slider.addEventListener("mouseleave", startAutoSlide);
-    
-            // Adjust on resize
-            window.addEventListener("resize", () => {
+   document.addEventListener("DOMContentLoaded", function () {
+    const slider = document.getElementById("slider");
+    const slides = document.querySelectorAll("#slider > div");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+
+    let index = 1; 
+    let slideWidth = slides[0].getBoundingClientRect().width;
+    const totalSlides = slides.length;
+
+    // Clone first and last slides for seamless loop
+    const firstClone = slides[0].cloneNode(true);
+    const lastClone = slides[totalSlides - 1].cloneNode(true);
+
+    slider.appendChild(firstClone);
+    slider.insertBefore(lastClone, slides[0]);
+
+    // Adjust slider position after adding clones
+    const newSlides = document.querySelectorAll("#slider > div");
+    slider.style.transform = `translateX(-${index * slideWidth}px)`;
+
+    function updateSlider() {
+        slider.style.transition = "transform 0.5s ease-in-out";
+        slider.style.transform = `translateX(-${index * slideWidth}px)`;
+    }
+
+    function nextSlide() {
+        if (index >= newSlides.length - 1) return;
+        index++;
+        updateSlider();
+
+        if (index === newSlides.length - 1) {
+            setTimeout(() => {
                 slider.style.transition = "none";
-                slider.style.transform = `translateX(-${index * slides[0].offsetWidth}px)`;
-            });
-        });
-    </script>
-    
+                index = 1;
+                slider.style.transform = `translateX(-${index * slideWidth}px)`;
+            }, 500);
+        }
+    }
+
+    function prevSlide() {
+        if (index <= 0) return;
+        index--;
+        updateSlider();
+
+        if (index === 0) {
+            setTimeout(() => {
+                slider.style.transition = "none";
+                index = newSlides.length - 2;
+                slider.style.transform = `translateX(-${index * slideWidth}px)`;
+            }, 500);
+        }
+    }
+
+    // Auto-slide every 3 seconds
+    let autoSlide = setInterval(nextSlide, 3000);
+
+    function stopAutoSlide() {
+        clearInterval(autoSlide);
+    }
+
+    function startAutoSlide() {
+        autoSlide = setInterval(nextSlide, 3000);
+    }
+
+    // Event Listeners
+    nextBtn.addEventListener("click", nextSlide);
+    prevBtn.addEventListener("click", prevSlide);
+    slider.addEventListener("mouseenter", stopAutoSlide);
+    slider.addEventListener("mouseleave", startAutoSlide);
+
+    // Touch swipe support for mobile
+    let startX = 0;
+    let endX = 0;
+
+    slider.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener("touchend", (e) => {
+        endX = e.changedTouches[0].clientX;
+        if (startX - endX > 50) nextSlide(); // Swipe left
+        if (endX - startX > 50) prevSlide(); // Swipe right
+    });
+
+    // Adjust on resize
+    window.addEventListener("resize", () => {
+        slideWidth = slides[0].getBoundingClientRect().width;
+        slider.style.transition = "none";
+        slider.style.transform = `translateX(-${index * slideWidth}px)`;
+    });
+});
+
+</script>
 
 
     {{-- news and letters script --}}
