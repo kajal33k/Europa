@@ -2,7 +2,7 @@
 
 @section('content')
 <header class="bg-gradient-to-r from-red-700 to-red-500 text-white py-12 shadow-lg">
-    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-6 gap-8">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-center px-6 gap-8">
         <h1 class="text-3xl md:text-6xl font-extrabold text-center md:text-left tracking-wide">
             About Us
         </h1>
@@ -81,26 +81,96 @@
     </p>
 
     <div class="mt-12 relative max-w-4xl mx-auto px-4">
-        <div class="overflow-hidden">
-            <div id="testimonial-slider" class="flex transition-transform duration-500">
-                <div class="bg-white text-gray-800 shadow-lg rounded-lg p-6 min-w-full text-center">
+        <div class="overflow-hidden relative">
+            <!-- Wrapper to avoid flickering -->
+            <div class="flex transition-transform duration-700 ease-in-out" id="testimonial-slider">
+                <!-- Cloned slides for seamless looping -->
+                <div class="slide bg-white text-gray-800 shadow-lg rounded-lg p-6 min-w-full text-center">
+                    <p class="italic">"The teachers are amazing, and the environment is so supportive!"</p>
+                    <h4 class="mt-4 text-lg font-semibold">Michael Thomson</h4>
+                </div>
+                <div class="slide bg-white text-gray-800 shadow-lg rounded-lg p-6 min-w-full text-center">
                     <p class="italic">"My child is thriving academically and socially. Thank you for the wonderful experience!"</p>
                     <h4 class="mt-4 text-lg font-semibold">Daniel Radplateu</h4>
                 </div>
-                <div class="bg-white text-gray-800 shadow-lg rounded-lg p-6 min-w-full text-center">
+                <div class="slide bg-white text-gray-800 shadow-lg rounded-lg p-6 min-w-full text-center">
                     <p class="italic">"This school has helped my child gain confidence and excel in studies."</p>
                     <h4 class="mt-4 text-lg font-semibold">Sussan Joseph</h4>
                 </div>
+                <!-- Cloned first slide to create infinite loop effect -->
+                <div class="slide bg-white text-gray-800 shadow-lg rounded-lg p-6 min-w-full text-center">
+                    <p class="italic">"The teachers are amazing, and the environment is so supportive!"</p>
+                    <h4 class="mt-4 text-lg font-semibold">Michael Thomson</h4>
+                </div>
             </div>
         </div>
-        <button id="prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-red-700 text-white px-4 py-2 rounded-full shadow-md hover:bg-red-800">
+
+        <!-- Navigation Buttons -->
+        <button id="prev" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-red-700 text-white px-4 py-2 rounded-full shadow-md hover:bg-red-800">
             ❮
         </button>
-        <button id="next" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-red-700 text-white px-4 py-2 rounded-full shadow-md hover:bg-red-800">
+        <button id="next" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-700 text-white px-4 py-2 rounded-full shadow-md hover:bg-red-800">
             ❯
         </button>
     </div>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const slider = document.getElementById("testimonial-slider");
+        const slides = document.querySelectorAll(".slide");
+        const prevButton = document.getElementById("prev");
+        const nextButton = document.getElementById("next");
+        let index = 1; // Start from the second slide (first real one)
+        let isTransitioning = false;
+
+        function updateSlider() {
+            slider.style.transition = "transform 0.7s ease-in-out";
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        function nextSlide() {
+            if (isTransitioning) return;
+            isTransitioning = true;
+            index++;
+            updateSlider();
+
+            // Reset position when reaching the cloned last slide
+            setTimeout(() => {
+                if (index === slides.length - 1) {
+                    slider.style.transition = "none";
+                    index = 1; // Jump back to the first real slide
+                    slider.style.transform = `translateX(-${index * 100}%)`;
+                }
+                isTransitioning = false;
+            }, 700);
+        }
+
+        function prevSlide() {
+            if (isTransitioning) return;
+            isTransitioning = true;
+            index--;
+            updateSlider();
+
+            // Reset position when reaching the first cloned slide
+            setTimeout(() => {
+                if (index === 0) {
+                    slider.style.transition = "none";
+                    index = slides.length - 2; // Jump to the last real slide
+                    slider.style.transform = `translateX(-${index * 100}%)`;
+                }
+                isTransitioning = false;
+            }, 700);
+        }
+
+        nextButton.addEventListener("click", nextSlide);
+        prevButton.addEventListener("click", prevSlide);
+
+        // Auto-slide every 3 seconds
+        setInterval(nextSlide, 3000);
+    });
+</script>
+
 
  
     <section class="py-12">

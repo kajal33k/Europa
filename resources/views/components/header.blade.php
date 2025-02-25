@@ -34,9 +34,9 @@
 {{-- NAVBAR --}}
 
 <nav class="bg-gray-50 text-black p-4">
-    <div class="container mx-auto flex justify-evenly items-center">
-        <a href="{{route('index')}}" class="text-2xl font-bold">
-            <img src="{{ asset('asset/img/logo.jpg') }}" alt="" class="h-12 md:w-90 w-60">
+    <div class="container mx-auto flex justify-between md:justify-evenly items-center">
+        <a href="{{ route('index') }}" class="text-2xl font-bold">
+            <img src="{{ asset('asset/img/logo.jpg') }}" alt="" class="h-12 md:w-80 w-44 py-2">
         </a>
         <button id="menu-btn" class="md:hidden focus:outline-none">
             <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -145,7 +145,7 @@
             {{-- <li><a href="#" class="hover:text-gray-300">Register</a></li> --}}
 
             <li onclick="togglePopup()" class=" text-black  rounded">Registration</li>
-{{-- 
+            {{-- 
             <script>
                 function togglePopup() {
                     document.getElementById("popup").classList.toggle("hidden");
@@ -201,10 +201,10 @@
                     popup.classList.toggle("hidden");
                     document.body.classList.toggle("overflow-hidden"); // Prevent background scrolling
                 }
-            
+
                 function validateForm(event) {
                     event.preventDefault();
-                    
+
                     let name = document.getElementById("name").value.trim();
                     let email = document.getElementById("email").value.trim();
                     let country = document.getElementById("country").value.trim();
@@ -213,7 +213,7 @@
                     let gender = document.getElementById("gender").value;
                     let phone = document.getElementById("phone").value.trim();
                     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            
+
                     if (!name) {
                         alert("Name is required");
                         return;
@@ -242,50 +242,99 @@
                         alert("Valid phone number is required");
                         return;
                     }
-            
+
                     alert("Registration Successful");
                     togglePopup(); // Close popup after successful validation
                 }
             </script>
-            
+
 
             <div id="popup"
                 class="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center hidden z-50 px-4">
-                <div class="bg-white p-4 sm:p-6 rounded-lg max-w-sm w-full shadow-lg">
+                <div class="bg-white p-4 sm:p-6 rounded-lg max-w-5xl w-full shadow-lg">
                     <h2 class="text-xl font-bold mb-4 text-center">Registration</h2>
-                    <form onsubmit="validateForm(event)" class="space-y-4">
-                        <div>
-                            <input type="text" id="name" placeholder="Full Name"
-                                class="w-full p-2 border rounded" />
+
+                    <form action="#" method="POST"
+                        class="mt-6 bg-white p-2 rounded-lg shadow-md border border-red-200">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 font-medium">Your Name</label>
+                                <input type="text"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                    placeholder="Full Name" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium">Email ID</label>
+                                <input type="email"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                    placeholder="Email ID" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium">Contact Number</label>
+                                <input type="text"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                    placeholder="Contact Number" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium">Principal Name</label>
+                                <input type="text"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                    placeholder="Full Name">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium">Principal Mobile Number</label>
+                                <input type="text"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                    placeholder="Contact Number">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium">Principal Email ID</label>
+                                <input type="email"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                    placeholder="Email ID">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium">School Name</label>
+                                <input type="text"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                    placeholder="School Name">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium">School Address</label>
+                                <input type="text"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                    placeholder="School Address">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium">School City</label>
+                                <input type="text"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                    placeholder="School City">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium">School State</label>
+                                <input type="text"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                    placeholder="School State">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium">School Pincode</label>
+                                <input type="text"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                    placeholder="School Pincode">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium">Your Country</label>
+                                <input type="text"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                    placeholder="Your Country">
+                            </div>
                         </div>
-                        <div>
-                            <input type="email" id="email" placeholder="Email"
-                                class="w-full p-2 border rounded" />
-                        </div>
-                        <div>
-                            <input type="text" id="country" placeholder="Country"
-                                class="w-full p-2 border rounded" />
-                        </div>
-                        <div>
-                            <input type="text" id="sport" placeholder="Sport"
-                                class="w-full p-2 border rounded" />
-                        </div>
-                        <div>
-                            <input type="number" id="age" placeholder="Age"
-                                class="w-full p-2 border rounded" />
-                        </div>
-                        <div>
-                            <select id="gender" class="w-full p-2 border rounded">
-                                <option value="">Select Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div>
-                            <input type="tel" id="phone" placeholder="Phone Number"
-                                class="w-full p-2 border rounded" />
-                        </div>
+
+                        {{-- <button type="submit"
+                            class="mt-6 bg-red-600 text-white py-3 px-6 w-full rounded-lg font-bold text-lg hover:bg-red-700 transition duration-300 ease-in-out shadow-lg">
+                            Submit Inquiry
+                        </button> --}}
                         <div class="flex flex-col sm:flex-row gap-2 sm:justify-between">
                             <button type="submit"
                                 class="w-full sm:w-auto border border-green-500 hover:bg-green-200 text-green-500 px-4 py-2 rounded">Submit</button>
@@ -396,41 +445,86 @@
         <!-- Mobile-Only Popup Modal -->
         <div id="mobilePopup"
             class="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center hidden z-50 px-4 sm:hidden mobile-modal">
-            <div class="bg-white p-4 rounded-lg max-w-sm w-full shadow-lg">
+            <div class="bg-white p-4 rounded-lg h-full max-w-sm w-full shadow-lg my-12 overflow-scroll">
                 <h2 class="text-xl font-bold mb-4 text-center">Registration</h2>
-                <form onsubmit="validateMobileForm(event)" class="space-y-4">
-                    <div>
-                        <input type="text" id="mobileName" placeholder="Full Name"
-                            class="w-full p-2 border rounded mobile-input" />
+
+                <form action="#" method="POST"
+                    class="mt-6 bg-white p-2 h-auto rounded-lg shadow-md border border-red-200 overflow-y-scroll">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-gray-700 font-medium">Your Name</label>
+                            <input type="text"
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                placeholder="Full Name" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium">Email ID</label>
+                            <input type="email"
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                placeholder="Email ID" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium">Contact Number</label>
+                            <input type="text"
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                placeholder="Contact Number" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium">Principal Name</label>
+                            <input type="text"
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                placeholder="Full Name">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium">Principal Mobile Number</label>
+                            <input type="text"
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                placeholder="Contact Number">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium">Principal Email ID</label>
+                            <input type="email"
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                placeholder="Email ID">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium">School Name</label>
+                            <input type="text"
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                placeholder="School Name">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium">School Address</label>
+                            <input type="text"
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                placeholder="School Address">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium">School City</label>
+                            <input type="text"
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                placeholder="School City">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium">School State</label>
+                            <input type="text"
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                placeholder="School State">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium">School Pincode</label>
+                            <input type="text"
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                placeholder="School Pincode">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium">Your Country</label>
+                            <input type="text"
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:border-red-500"
+                                placeholder="Your Country">
+                        </div>
                     </div>
-                    <div>
-                        <input type="email" id="mobileEmail" placeholder="Email"
-                            class="w-full p-2 border rounded mobile-input" />
-                    </div>
-                    <div>
-                        <input type="text" id="mobileCountry" placeholder="Country"
-                            class="w-full p-2 border rounded mobile-input" />
-                    </div>
-                    <div>
-                        <input type="text" id="mobileSport" placeholder="Sport"
-                            class="w-full p-2 border rounded mobile-input" />
-                    </div>
-                    <div>
-                        <input type="number" id="mobileAge" placeholder="Age"
-                            class="w-full p-2 border rounded mobile-input" />
-                    </div>
-                    <div>
-                        <select id="mobileGender" class="w-full p-2 border rounded mobile-input">
-                            <option value="">Select Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div>
-                        <input type="tel" id="mobilePhone" placeholder="Phone Number"
-                            class="w-full p-2 border rounded mobile-input" />
-                    </div>
+
                     <div class="flex flex-col gap-2">
                         <button type="submit"
                             class="w-full border border-green-500 hover:bg-green-200 text-green-500 px-4 py-2 rounded mobile-btn">Submit</button>
